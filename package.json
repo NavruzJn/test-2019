@@ -7,13 +7,19 @@
     "lint": "tslint --project tsconfig.json -c tslint.json -t codeFrame backend/**/*.ts"
   },
   "devDependencies": {
+    "husky": "^2.4.1",
     "lerna": "3.15.0",
-    "tslint": "^5.17.0",
-    "husky": "^2.4.1"
+    "tslint": "^5.17.0"
   },
   "husky": {
     "hooks": {
       "pre-push": "yarn lint && yarn typecheck"
     }
+  },
+  "workspaces": [
+    "backend/*"
+  ],
+  "dependencies": {
+    "passport-jwt": "^4.0.0"
   }
 }

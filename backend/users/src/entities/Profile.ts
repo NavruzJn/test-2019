@@ -1,8 +1,8 @@
 import { User } from './User'
-import { PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, Entity } from 'typeorm'
+import {PrimaryGeneratedColumn, Column, OneToOne, JoinColumn, Entity, BaseEntity} from 'typeorm'
 
-@Entity()
-export class Profile {
+@Entity({ name: 'profile' })
+export class Profile extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number
 
@@ -13,6 +13,6 @@ export class Profile {
   lastName: string
 
   @OneToOne(type => User)
-  @JoinColumn()
+  @JoinColumn({ name: 'userId', referencedColumnName: 'id' })
   user: User
 }

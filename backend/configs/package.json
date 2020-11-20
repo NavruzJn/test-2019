@@ -1,0 +1,7 @@
+{
+  "name": "@backend/configs",
+  "version": "1.0.0",
+  "dependencies": {
+    "@nestjs/config": "^0.5.0"
+  }
+}

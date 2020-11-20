@@ -1,13 +1,14 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm'
-import { RoleType } from '../enums'
+import {Entity, PrimaryGeneratedColumn, Column, BaseEntity} from 'typeorm'
+import {ActionType, PossessionType, RoleType} from '../enums'
+import {ResourceType} from '../enums/ResourceType'
 
 export interface Permission {
-  resource: string
-  action: string
+  resource: ResourceType
+  action: ActionType
 }
 
-@Entity()
-export class Role {
+@Entity('role')
+export class Role extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number
 
@@ -17,6 +18,9 @@ export class Role {
   @Column('jsonb', { default: [], nullable: true })
   permissions: Permission[] = []
 
+  @Column('enum', { enum: PossessionType })
+  possession: PossessionType
+
   @Column('enum', { enum: RoleType, unique: true })
-  role: string
+  role: RoleType
 }

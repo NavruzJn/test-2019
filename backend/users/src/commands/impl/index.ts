@@ -1,1 +1,5 @@
 export * from './RegisterUserCommand'
+export * from './GetUserCommand'
+export * from './LoginUserCommand'
+export * from './UpdateUserCommand'
+export * from './SendEmailCommand'

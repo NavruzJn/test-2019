@@ -1,9 +1,21 @@
+enum RoleType {
+  user
+  support
+}
+
 type User {
   id: ID!
   email: String!
   profile: Profile
   registeredAt: DateTime
-  lastLogonAt: DeteTime
+  lastLogonAt: DateTime
+}
+
+type AcessToken {
+  expiresIn: Int!,
+  accessToken: String!,
+  user: User,
+  status: Int!,
 }
 
 type Profile {
@@ -17,12 +29,8 @@ type RegisterUserErrors {
 }
 
 type RegisterUserResponse {
-  errors: RegisterUserErrors
-}
-
-input RegisterUserInput {
-  email: String!
-  password: String!
+  email: String
+  password: String
 }
 
 type UpdateProfileErrors {
@@ -34,10 +42,6 @@ type UpdateProfileResponse {
   errors: UpdateProfileErrors
 }
 
-input UpdateProfileInput {
-  firstName: String!
-  lastName: String!
-}
 
 type UserList {
   rows: [User]!
@@ -45,12 +49,31 @@ type UserList {
 }
 
 type Mutation {
-  register (input: RegisterUserInput!) : RegisterUserResponse!
-  updateProfile (input: UpdateProfileInput!) : UpdateProfileResponse!
+  register (input: RegisterUserInput!) : AcessToken!
+  updateProfile (input: UpdateProfileInput!) : User!
 }
 
 type Query {
   me: User!
+  login (input: LoginInput!) : AcessToken!
   user (id: ID!) : User!
   users : UserList!
 }
+
+input RegisterUserInput {
+  email: String!
+  password: String!
+  roleType: RoleType!
+}
+
+input LoginInput {
+  email: String!
+  password: String!
+}
+
+input UpdateProfileInput {
+  firstName: String!
+  lastName: String!
+}
+
+
