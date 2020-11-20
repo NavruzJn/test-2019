@@ -8,7 +8,7 @@ import {SendEmailEvent} from '../events/impl'
 @Injectable()
 export class SendEmailSaga {
     @Saga()
-    dragonKilled = (events$: Observable<any>): Observable<ICommand> => {
+    sendEmail = (events$: Observable<any>): Observable<ICommand> => {
         return events$
             .pipe(
                 ofType(SendEmailEvent),
